@@ -360,7 +360,7 @@ new Vue({
             onLineUsers:[
                 {
                     id: "group",
-                    avatarUrl: "http://148.70.90.247/static/images/group-icon.png",
+                    avatarUrl: "/static/images/group-icon.png",
                     name: "聊天室群",
                     type: "room"
                 }
@@ -379,12 +379,6 @@ new Vue({
             logs:[],
             isShowLog:false,
             keyWord:"",
-            author:{
-                email:"auth@cfa.com",
-                repositoriesUrl:"https://github.com/BruinK/security-chat-room",
-                userName:"BruinK",
-                repositoriesName:"security-chat-room"
-            }
         }
     },
     created(){
@@ -488,7 +482,7 @@ new Vue({
         },
         initSocketEvent(){
             let _this=this;
-            _this.socket=io("http://148.70.90.247");
+            _this.socket=io("socket.io");
             _this.socket.on("message",(from,to,message,type)=>{
                 _this.receiveMessage(from,to,message,type)
             })

@@ -249,6 +249,11 @@
       document.addEventListener('click',(e)=>{
         _this.isShow=false;
       })
+      _this.user.name=_this.randomText();
+      let QQ=_this.randomQQ();
+      let url="http://q.qlogo.cn/headimg_dl?dst_uin=" + QQ + "&spec=100";
+      _this.addQQAvatar(QQ);
+      _this.user.avatarUrl=url;
     },
     methods:{
       addQQAvatar(QQ){
@@ -257,14 +262,15 @@
           let url="http://q.qlogo.cn/headimg_dl?dst_uin=" + QQ + "&spec=100";
           if(this.avatars.indexOf(url)==-1){
             this.avatars.push(url);
+            this.user.avatarUrl=url
           }
-          this.QQ=""
         }else {
           console.log("请输入正确的QQ号！")
           this.$alterMessage({
             type:'info',
             text: "请输入正确的QQ号！"
           })
+          this.QQ=""
         }
       },
       login(user){
@@ -347,17 +353,11 @@ new Vue({
       onLineUsers:[
         {
           id: "group",
-          avatarUrl: "http://148.70.90.247/static/images/group-icon.png",
+          avatarUrl: "/static/images/group-icon.png",
           name: "聊天室群",
           type: "room"
         }
       ],
-      author:{
-        email:"auth@cfa.com",
-        repositoriesUrl:"https://github.com/BruinK/security-chat-room",
-        userName:"BruinK",
-        repositoriesName:"security-chat-room"
-      },
       threadId:"group",
       setting:{
         isVoice:true,
@@ -475,7 +475,7 @@ new Vue({
     },
     initSocketEvent(){
       let _this=this;
-      _this.socket=io("http://148.70.90.247");
+      _this.socket=io();
       _this.socket.on("message",(from,to,message,type)=>{
         _this.receiveMessage(from,to,message,type)
       })

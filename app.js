@@ -51,7 +51,7 @@ app.use('/static', express.static(__dirname + '/static'));
 app.get("/", (req, res) => {
   let userAgent = req.headers['user-agent'].toLowerCase();
   if (kit.getDeviceType(userAgent)=='touch') {
-    let path = __dirname + '/static/iChat.html';
+    let path = __dirname + '/static/mobileIndex.html';
     res.sendFile(path);
   } else {
     let path = __dirname + '/static/index.html';

@@ -271,14 +271,15 @@
           let url="http://q.qlogo.cn/headimg_dl?dst_uin=" + QQ + "&spec=100";
           if(this.avatars.indexOf(url)==-1){
             this.avatars.push(url);
+            this.user.avatarUrl=url
           }
-          this.QQ=""
         }else {
           console.log("请输入正确的QQ号！")
           this.$alterMessage({
             type:'info',
             text: "请输入正确的QQ号！"
           })
+          this.QQ=""
         }
       },
       login(user){
@@ -360,7 +361,7 @@ new Vue({
       onLineUsers:[
         {
           id: "group",
-          avatarUrl: "http://148.70.90.247/static/images/group-icon.png",
+          avatarUrl: "/static/images/group-icon.png",
           name: "聊天室群",
           type: "room"
         }
@@ -379,12 +380,6 @@ new Vue({
       logs:[],
       isShowLog:false,
       keyWord:"",
-      author:{
-        email:"auth@cfa.com",
-        repositoriesUrl:"https://github.com/BruinK/security-chat-room",
-        userName:"BruinK",
-        repositoriesName:"security-chat-room"
-      }
     }
   },
   created(){
