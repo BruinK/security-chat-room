@@ -259,7 +259,7 @@ html,body{
 /*****设置面板样式******/
 .iTalk-bannerBox{
     height: 160px;
-    background-image: url("../images/ceCo1gMpzZoQ.jpg");
+    background-image: url("../images/banner2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -623,7 +623,7 @@ html,body{
 }
 /*******登录样式*********/
 .iTalk-loginBox{
-    background-image: url("../images/a1 (10).jpg");
+    background-image: url("../images/banner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

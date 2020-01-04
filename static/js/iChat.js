@@ -227,19 +227,9 @@
       return {
         user:{
           name:"",
-          avatarUrl:"http://q.qlogo.cn/headimg_dl?dst_uin=705597001&spec=100",
+          avatarUrl:"",
           type:"user",
         },
-        avatars:[
-          'http://q.qlogo.cn/headimg_dl?dst_uin=705597001&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=956411241&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=1361514346&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=624748513&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=1741841217&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=157509895&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=453079985&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=753678776&spec=100',
-        ],
         QQ:"",
         isShow:false,
       }
@@ -260,10 +250,7 @@
         let reg=/^[1-9][0-9]{3,9}[0-9]$/;
         if(reg.test(QQ)){
           let url="http://q.qlogo.cn/headimg_dl?dst_uin=" + QQ + "&spec=100";
-          if(this.avatars.indexOf(url)==-1){
-            this.avatars.push(url);
-            this.user.avatarUrl=url
-          }
+          this.user.avatarUrl=url
         }else {
           console.log("请输入正确的QQ号！")
           this.$alterMessage({

@@ -236,19 +236,9 @@
       return {
         user:{
           name:"",
-          avatarUrl:"http://q.qlogo.cn/headimg_dl?dst_uin=705597001&spec=100",
+          avatarUrl:"",
           type:"user",
         },
-        avatars:[
-          'http://q.qlogo.cn/headimg_dl?dst_uin=705597001&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=956411241&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=1361514346&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=624748513&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=1741841217&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=157509895&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=453079985&spec=100',
-          'http://q.qlogo.cn/headimg_dl?dst_uin=753678776&spec=100',
-        ],
         QQ:"",
         isShow:false,
       }
@@ -269,10 +259,7 @@
         let reg=/^[1-9][0-9]{3,9}[0-9]$/;
         if(reg.test(QQ)){
           let url="http://q.qlogo.cn/headimg_dl?dst_uin=" + QQ + "&spec=100";
-          if(this.avatars.indexOf(url)==-1){
-            this.avatars.push(url);
-            this.user.avatarUrl=url
-          }
+          this.user.avatarUrl=url
         }else {
           console.log("请输入正确的QQ号！")
           this.$alterMessage({
@@ -388,7 +375,6 @@ new Vue({
     document.addEventListener('click',(e)=>{
       _this.isShowLog=false;
     });
-    _this.initBg();
   },
   computed:{
     messages(){
@@ -489,7 +475,6 @@ new Vue({
       })
       _this.socket.on("groupMessage",(from,to,message,type)=>{
         _this.receiveMessage(from,to,message,type)
-        _this.cmd(message);
       })
       _this.socket.on("system",(user,type)=>{
         switch (type) {
@@ -637,43 +622,5 @@ new Vue({
       })
       return arr;
     },
-    initBg:function () {
-      this.$http.jsonp("https://api.asilu.com/bg/").then(function (response) {
-        let images=response.body.images,
-          len=images.length;
-        setInterval(function () {
-          let index=parseInt(Math.random()*len);
-          let img=new Image();
-          img.addEventListener('load', (e)=>{
-            document.body.style.backgroundImage="url("+images[index].url+")";
-          })
-          img.src=images[index].url;
-        },30000)
-      })
-    },
-    cmd(text){
-      let name=this.loginUser.name;
-      let cmds=["@"+name+":播放音乐","@"+name+":暂停播放","@"+name+":上一曲","@"+name+":下一曲"];
-      let index=cmds.indexOf(text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, ''));
-      let $player=this.$refs["player"];
-      if($player){
-        switch (index) {
-          case 0:
-            $player.audio.play();
-            break;
-          case 1:
-            $player.audio.pause();
-            break;
-          case 2:
-            $player.prev();
-            break;
-          case 3:
-            $player.next();
-            break;
-          default:
-            return;
-        }
-      }
-    }
   }
 })
